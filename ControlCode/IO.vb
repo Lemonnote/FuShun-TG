@@ -93,12 +93,13 @@ Public NotInheritable Class IO
     <IO(IOType.Temp, 3, , , "%tC"), Translate("zh-TW", "C缸溫度")> Public CTankTemperature As Short
     '***********************PH功能*************************************************************
     <IO(IOType.Temp, 4, , , "%tC"), Translate("zh-TW", "PH檢測筒溫度")> Public PhCheckTemp As Short
-    '******************************************************************************************
+  '******************************************************************************************
 
-    <IO(IOType.Counter, 1)> Public HSCounter1 As Integer
-    <IO(IOType.Counter, 2)> Public HSCounter2 As Integer
+  <IO(IOType.Counter, 1)> Public 進水量 As Integer 'D219
+  <IO(IOType.Counter, 2)> Public 用蒸氣量 As Integer 'D220
+  <IO(IOType.Counter, 3)> Public 用電量 As Integer 'D221
 
-    <IO(IOType.Anout, 1), Translate("zh-TW", "比例式昇溫")> Public TemperatureControlHeat As Short  '400
+  <IO(IOType.Anout, 1), Translate("zh-TW", "比例式昇溫")> Public TemperatureControlHeat As Short  '400
     <IO(IOType.Anout, 2), Translate("zh-TW", "主泵變頻器")> Public PumpSpeedControl As Short  '401
     <IO(IOType.Anout, 3), Translate("zh-TW", "B變頻控制")> Public BDosingOutput As Short  '402
     <IO(IOType.Anout, 4), Translate("zh-TW", "比例式降溫")> Public TemperatureControlCool As Short  '403
@@ -256,15 +257,14 @@ Public NotInheritable Class IO
 
 
 
-
-    <EditorBrowsable(EditorBrowsableState.Advanced)> _
+  <EditorBrowsable(EditorBrowsableState.Advanced)> _
     Public Function ReadInputs(ByVal dinp() As Boolean, ByVal aninp() As Short, ByVal temp() As Short) As Boolean
         CheckForSerialPortParametersChanged()
         If Plc.Read(1, "WM400", dinp) = Ports.LA60B.Result.OK Then
             ReadInputs = True
             PlcTimeout.TimeRemaining = 1 ' must have a problem for at least 1 second before triggering the alarm
         End If
-    Static ai(18) As UShort
+    Static ai(22) As UShort
 
     If Plc.Read(1, "D200", ai) = Ports.LA60B.Result.OK Then
       If ControlCode.Parameters.TempAdd = 0 Then
@@ -473,10 +473,11 @@ Public NotInheritable Class IO
         End Select
       Next
 
-      HSCounter1 = ai(11)
-      HSCounter2 = ai(12)
+      進水量 = ai(20)
+      用蒸氣量 = ai(21)
+      用電量 = ai(22)
     End If
-    End Function
+  End Function
 
     <EditorBrowsable(EditorBrowsableState.Advanced)> _
     Public Sub WriteOutputs(ByVal dout() As Boolean, ByVal anout() As Short)

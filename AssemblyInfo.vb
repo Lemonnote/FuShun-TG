@@ -6,18 +6,20 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisibleAttribute(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: GuidAttribute("c7a7269f-e825-4aa2-aa88-1460d9e4435f")> 
+<Assembly: GuidAttribute("c7a7269f-e825-4aa2-aa88-1460d9e4435f")>
 
-<Assembly: AssemblyTitleAttribute("TG838 V2")> 
+<Assembly: AssemblyTitleAttribute("TG838 V2")>
 <Assembly: AssemblyDescriptionAttribute("")> 
 <Assembly: AssemblyCompanyAttribute("Adaptive Control")> 
 <Assembly: AssemblyProductAttribute("TG838 V2")> 
 <Assembly: AssemblyCopyrightAttribute("Copyright ©  2008")> 
 <Assembly: AssemblyTrademarkAttribute("")>
 
-<Assembly: AssemblyVersionAttribute("2.50.*")>
-<Assembly: AssemblyFileVersionAttribute("2.50")>
+<Assembly: AssemblyVersionAttribute("2.53.*")>
+<Assembly: AssemblyFileVersionAttribute("2.53")>
 
+'Version 2.53 2013-04-25 GeorgeLin
+'新增small mimic，可以繪製溫度曲線圖
 
 'Version 1.93 2013-04-25 GeorgeLin
 '修改取樣通知的動作如下

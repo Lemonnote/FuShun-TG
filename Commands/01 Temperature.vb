@@ -40,9 +40,13 @@ Public NotInheritable Class Command01
 
             TargetTemp = Maximum(param(1) * 10, 1500)
             Gradient = param(2) * 10 + param(3)
-            HoldTime = 60 * param(4)
-            Wait.TimeRemaining = HoldTime
-            Wait.Pause()
+      If param.Length >= 5 Then
+        HoldTime = 60 * param(4)
+      Else
+        HoldTime = 0
+      End If
+      Wait.TimeRemaining = HoldTime
+      Wait.Pause()
 
             'Check Temperature mode - change during TPHold if necessary
             '.TemperatureControl.TempMode = 0

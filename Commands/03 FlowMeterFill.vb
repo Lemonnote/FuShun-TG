@@ -108,21 +108,21 @@ Public NotInheritable Class Command03
           StateString = If(.Language = LanguageValue.ZhTw, "流量計重置", "Reset flowmeter")
           現有流量值 = .總水量累計
           目標流量值 = .總水量累計 + DesiredVolume
-          'If (Not Wait.Finished) Or .IO.HSCounter1 > 10 Then Exit Select
-                    'CounterSetPoint = .IO.HSCounter1
-                    'CounterTargetPoint = (TargetPulses + CounterSetPoint)
-                    'CounterRealPoint = .IO.HSCounter1 * .Parameters.VolumePerCount
-                    State = S03.WaitWater
+          'If (Not Wait.Finished) Or .IO.進水量 > 10 Then Exit Select
+          'CounterSetPoint = .IO.進水量
+          'CounterTargetPoint = (TargetPulses + CounterSetPoint)
+          'CounterRealPoint = .IO.進水量 * .Parameters.VolumePerCount
+          State = S03.WaitWater
 
-                Case S03.WaitWater
-                    If .Parent.IsPaused Or Not .IO.SystemAuto Then
-                        StateWas = State
-                        State = S03.Pause
-                        Wait.Pause()
-                    End If
-                    Dim ddd, ttt As Double
-                    ttt = (.Parameters.VolumePerCount / 1)
-                    ddd = CType((.IO.HSCounter1) * (.Parameters.VolumePerCount / 1), Double)
+        Case S03.WaitWater
+          If .Parent.IsPaused Or Not .IO.SystemAuto Then
+            StateWas = State
+            State = S03.Pause
+            Wait.Pause()
+          End If
+          Dim ddd, ttt As Double
+          ttt = (.Parameters.VolumePerCount / 1)
+          ddd = CType((.IO.進水量) * (.Parameters.VolumePerCount / 1), Double)
           StateString = If(.Language = LanguageValue.ZhTw, "主缸進水中:", "Filling:") & .總水量累計 - 現有流量值 & "L"
           'If ddd < TargetPulses Then Exit Select
           If .總水量累計 >= 目標流量值 Then

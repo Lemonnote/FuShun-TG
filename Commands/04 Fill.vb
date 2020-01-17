@@ -122,7 +122,7 @@ Public NotInheritable Class Command04
 
                 Case S04.WaitResetCounter
                     StateString = If(.Language = LanguageValue.ZhTw, "流量計重置", "Reset flowmeter")
-                    If (Not Wait.Finished) Or .IO.HSCounter1 > 10 Then Exit Select
+                    If (Not Wait.Finished) Or .IO.進水量 > 10 Then Exit Select
                     State = S04.WaitForLevel
 
 
@@ -133,10 +133,10 @@ Public NotInheritable Class Command04
                         Wait.Pause()
                     End If
                     If TotalVolume > 0 Then
-                        CounterRealPoint = .IO.HSCounter1 * .Parameters.VolumePerCount
+                        CounterRealPoint = .IO.進水量 * .Parameters.VolumePerCount
                         StateString = If(.Language = LanguageValue.ZhTw, "主缸進水中:", "Filling:") & CounterRealPoint & "L"
                         If CounterRealPoint < .TargetVolume Then Exit Select
-                        CounterRealPoint = .IO.HSCounter1 * .Parameters.VolumePerCount
+                        CounterRealPoint = .IO.進水量 * .Parameters.VolumePerCount
                         State = S04.WaitLowLevel
                     Else
                         If MainTankLevel = 0 Then

@@ -690,9 +690,9 @@ Public Interface ACParent
 
   ''' <summary>Simulates pressing the Run, Pause, Stop, Yes and No buttons.</summary>
   ''' <remarks>Only when the values go from false to true are they acted on.</remarks>
-    Sub PressButtons(ByVal run As Boolean, ByVal pause As Boolean, ByVal [stop] As Boolean, ByVal yes As Boolean, ByVal no As Boolean)
+  Sub PressButtons(ByVal run As Boolean, ByVal pause As Boolean, ByVal [stop] As Boolean, ByVal yes As Boolean, ByVal no As Boolean)
 
-    Sub PressForwardBackward(ByVal forward As Boolean, ByVal backward As Boolean)
+  Sub PressForwardBackward(ByVal forward As Boolean, ByVal backward As Boolean)
 
   ''' <summary>Gets whether a job is running right now. You can also get this by checking the <see cref="Running"/> property.</summary>
   ''' <returns>true if a job is running right now; otherwise, false.</returns>
@@ -856,7 +856,7 @@ Public Interface ACParent
   ''' <param name="text">Optionally, the text to show on the button, if standard text is not wanted.</param>
   ''' <param name="options">Further options for the standard button.</param>
   ''' <remarks>If used with <paramref name="button"/>=<see cref="StandardButton.Program"/>, then the following <paramref name="options"/> can be used for the program window:  Pause=1, Run=2, ChangeStep=4,Stop=8, YesOrNo=16, Halt=32.</remarks>
-  Sub AddStandardButton(ByVal button As StandardButton, ByVal position As ButtonPosition, Optional ByVal text As String = Nothing, _
+  Sub AddStandardButton(ByVal button As StandardButton, ByVal position As ButtonPosition, Optional ByVal text As String = Nothing,
                         Optional ByVal options As Integer = 0)
 
   ''' <summary>Presses a button on one of the main toolbars.</summary>
@@ -903,7 +903,7 @@ Public Interface ACParent
   ''' <param name="jobName">The job.</param>
   ''' <param name="programNumbers">The program numbers.</param>
   ''' <param name="substituteSteps">The steps to substitute.</param>
-  Sub StartJob(ByVal jobName As String, ByVal dataId As Object, ByVal programNumbers As IEnumerable(Of Integer), _
+  Sub StartJob(ByVal jobName As String, ByVal dataId As Object, ByVal programNumbers As IEnumerable(Of Integer),
              Optional ByVal substituteSteps As IEnumerable(Of String) = Nothing)
 
   ''' <summary>Starts a job running.</summary>
@@ -976,6 +976,7 @@ Public Interface ACParent
   ''' <summary>Gets the data found in the attached dongle, if any.</summary>
   ''' <returns>the data found in the attached dongle, or null if no dongle is in use.</returns>
   ReadOnly Property DongleBytes() As Byte()
+  ReadOnly Property ControlSequencer() As Object
 End Interface
 
 Public Interface RemoteValues
